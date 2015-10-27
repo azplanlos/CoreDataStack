@@ -493,7 +493,11 @@
             NSLog(@"Unable to move temporary store: %@", error);
         }
     } else {
-        [[NSFileManager defaultManager] moveItemAtURL:self.databaseURL toURL:[self.databaseURL URLByAppendingPathExtension:@"old"] error:&error];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:[self.databaseURL URLByAppendingPathExtension:@"old"].path]) [[NSFileManager defaultManager] removeItemAtURL:[self.databaseURL URLByAppendingPathExtension:@"old"] error:&error];
+        BOOL moved = [[NSFileManager defaultManager] moveItemAtURL:self.databaseURL toURL:[self.databaseURL URLByAppendingPathExtension:@"old"] error:&error];
+        if (!moved) {
+            NSLog(@"Unable to move temporary store: %@", error);
+        }
     }
     
     NSDictionary* options = nil;
