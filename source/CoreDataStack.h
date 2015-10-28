@@ -67,7 +67,7 @@ typedef void (^CoreDataStackErrorHandler)(CoreDataStack* stack, NSError* error);
  
  "Core Data does not present a situation where reads are “safe” but changes are “dangerous”—every operation is “dangerous” because every operation has cache coherency effects and can trigger faulting"
  */
-@property(nonatomic,assign,readonly) NSThread* threadThatOwnsThisStack;
+@property(nonatomic,assign) NSThread* threadThatOwnsThisStack;
 
 /*! The actual URL that's in use - you can pass this to init, or let the CoreDataStack work it out automatically */
 @property(nonatomic,retain) NSURL* databaseURL;

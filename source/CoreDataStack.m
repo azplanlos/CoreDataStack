@@ -8,7 +8,6 @@
 
 @interface CoreDataStack()
 + (NSURL *)applicationDocumentsDirectory;
-@property(nonatomic,assign,readwrite) NSThread* threadThatOwnsThisStack;
 @end
 
 @implementation CoreDataStack
@@ -311,7 +310,7 @@
  */
 -(NSManagedObjectContext*) managedObjectContext
 {
-	if( _moc == nil )
+    if( _moc == nil )
 	{
 		_moc = [[NSManagedObjectContext alloc] initWithConcurrencyType:self.managedObjectContextConcurrencyType];
 		[_moc setPersistentStoreCoordinator:[self persistentStoreCoordinator]];
