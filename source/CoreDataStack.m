@@ -457,7 +457,7 @@
 {
 	for( NSPersistentStore* store in [self.persistentStoreCoordinator persistentStores] )
 	{
-		NSError *error;
+		NSError *error = nil;
 		NSURL *storeURL = store.URL;
 		[self.persistentStoreCoordinator removePersistentStore:store error:&error];
 		[[NSFileManager defaultManager] removeItemAtPath:storeURL.path error:&error];
@@ -474,7 +474,7 @@
 
 -(void)replaceDatabaseWithURL:(NSURL *)newDatabaseURL {
     [_moc reset];
-    NSError *error;
+    NSError *error = nil;
     for (NSPersistentStore *store in _psc.persistentStores) {
         BOOL removed = [_psc removePersistentStore:store error:&error];
         if (!removed) {
